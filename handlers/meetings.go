@@ -31,6 +31,7 @@ func SaveMeetings(w http.ResponseWriter, r *http.Request) {
 	m := make(map[string]interface{})
 	m["data"] = meetings
 	ResponseV1(w, "Successfully registered", m)
+
 }
 
 //GetMeeting : ""

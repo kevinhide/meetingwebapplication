@@ -91,15 +91,21 @@ func GetAllUserMeetingsByEmail(participant string) ([]models.Meetings, error) {
 }
 
 //CheckUniqueParticipant : ""
-func CheckUniqueParticipant(email, RSVP string) (int, error) {
+func CheckUniqueParticipant(meetings *models.Meetings) (int, error) {
 
 	db := GetDB()
 	defer db.Session.Close()
 
+	gtQuery := bson.M{"$gte": meetings.StartTime}
+
+	ltQuery := bson.M{"$lte": meetings.EndTime}
+
 	query := bson.M{
 		"$or": []bson.M{
-			bson.M{"participants.email": email},
-			bson.M{"participants.RSVP": RSVP},
+			bson.M{"participants.email": meetings.Participants.Email},
+			bson.M{"participants.RSVP": meetings.Participants.RSVP},
+			bson.M{"meetings.StartTime": gtQuery},
+			bson.M{"meetings.endTime": ltQuery},
 		},
 	}
 

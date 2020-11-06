@@ -4,6 +4,8 @@ import (
 	"HelpNow/daos"
 	"HelpNow/models"
 	"errors"
+	"fmt"
+	"log"
 	"time"
 )
 
@@ -12,17 +14,18 @@ func SaveMeetings(meetings *models.Meetings) error {
 
 	var err error
 
-	count, err := daos.CheckUniqueParticipant(meetings.Participants.Email, meetings.Participants.RSVP)
+	count, err := daos.CheckUniqueParticipant(meetings)
 	if err != nil {
 		return errors.New("Can't find Uniquenessuser")
 	}
-
-	if count > 0 {
+	if count > 1 {
+		log.Println(err)
 		return errors.New("Participant Already have meeting on this schedule")
 	} else {
 		meetings.CreationTimestamp = time.Now()
 		err = daos.SaveMeetings(meetings)
 		if err != nil {
+			fmt.Println(err.Error())
 			return errors.New("Service Error")
 		}
 	}
