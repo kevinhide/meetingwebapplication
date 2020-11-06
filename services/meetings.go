@@ -4,7 +4,6 @@ import (
 	"HelpNow/daos"
 	"HelpNow/models"
 	"errors"
-	"fmt"
 	"time"
 )
 
@@ -15,7 +14,6 @@ func SaveMeetings(meetings *models.Meetings) error {
 
 	count, err := daos.CheckUniqueParticipant(meetings.Participants.Email, meetings.Participants.RSVP)
 	if err != nil {
-		fmt.Println(err)
 		return errors.New("Can't find Uniquenessuser")
 	}
 
