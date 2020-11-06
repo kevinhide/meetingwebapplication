@@ -17,7 +17,7 @@ func SaveMeetings(meetings *models.Meetings) error {
 		return errors.New("Can't find Uniquenessuser")
 	}
 
-	if count > 1 {
+	if count > 0 {
 		return errors.New("Participant Already have meeting on this schedule")
 	} else {
 		meetings.CreationTimestamp = time.Now()
