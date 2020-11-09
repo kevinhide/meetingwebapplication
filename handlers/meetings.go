@@ -62,6 +62,41 @@ func GetAllMeetings(w http.ResponseWriter, r *http.Request) {
 
 	end := r.URL.Query().Get("end")
 
+	/*var projectFields []string
+	pageNo := r.URL.Query().Get("pageNo")
+	size := r.URL.Query().Get("size")
+	sort := r.URL.Query().Get("sort")
+	sortOrder := r.URL.Query().Get("sortOrder")
+	if len(r.URL.Query().Get("fields")) > 0 {
+		projectFields = strings.Split(r.URL.Query().Get("fields"), ",")
+	}
+
+	var p *models.Pagination
+	if pageNo != "no" {
+		p = new(models.Pagination)
+		if p.PageNum = 1; pageNo != "" {
+			page, err := strconv.Atoi(pageNo)
+			if p.PageNum = 1; err == nil {
+				p.PageNum = page
+			}
+		}
+		if p.Limit = 10; size != "" {
+			limit, err := strconv.Atoi(size)
+			if p.Limit = 10; err == nil {
+				p.Limit = limit
+			}
+		}
+		if p.SortBy = "_id"; sort != "" {
+			p.SortBy = sort
+		}
+		if p.SortOrder = 1; sortOrder == "-1" {
+			sortOrder, err := strconv.Atoi(sortOrder)
+			if p.SortOrder = 1; err == nil {
+				p.SortOrder = sortOrder
+			}
+		}
+	}*/
+
 	data, err := services.GetAllMeetings(start, end)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

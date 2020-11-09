@@ -34,6 +34,18 @@ type ResponseSruct struct {
 	Response Response `json:"response,omitempty"`
 }
 
+// Pagination : Pagination struct
+type Pagination struct {
+	PageNum   int    `json:"pageNum" bson:"pageNum"`
+	Limit     int    `json:"limit" bson:"limit"`
+	SortBy    string `json:"sortBy" bson:"sortBy"`
+	SortOrder int    `json:"sortOrder" bson:"sortOrder"`
+	Count     int    `json:"count" bson:"count"`
+	NextPage  int    `json:"nextPage" bson:"nextPage"`
+	PrevPage  int    `json:"prevPage" bson:"prevPage"`
+	TotalPage int    `json:"totalPage" bson:"totalPage"`
+}
+
 //Response : ""
 type Response struct {
 	StatusCode int                    `json:"statusCode,omitempty"`
