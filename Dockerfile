@@ -15,6 +15,8 @@ RUN GOOS=windows GOARCH=amd64 go build -o ./HelpNow ./main.go
 
 EXPOSE 8080
 
-ENTRYPOINT [ "bash", "entrypoint.sh" ]
+COPY docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT [ "bash", "#!/bin/sh" ]
 
 CMD ["/app/main"]
