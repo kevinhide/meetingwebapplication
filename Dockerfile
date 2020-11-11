@@ -1,8 +1,9 @@
 FROM golang:1.12
 
 # add the source
-COPY . /go/src/HelpNow
 WORKDIR /go/src/HelpNow/
+
+COPY . /go/src/HelpNow
 
 RUN go get github.com/gorilla/mux && \
 go get gopkg.in/mgo.v2 && \
@@ -15,8 +16,8 @@ RUN GOOS=windows GOARCH=amd64 go build -o ./HelpNow ./main.go
 
 EXPOSE 8080
 
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY . /go/src/HelpNow/
 
-ENTRYPOINT [ "bash", "#!/bin/sh" ]
+ENTRYPOINT ["/go/src/HelpNow/-entrypoint.sh"]
 
-CMD ["/app/main"]
+CMD ["run"]
